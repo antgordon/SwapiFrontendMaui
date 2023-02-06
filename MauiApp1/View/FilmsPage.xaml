@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.View.FilmsPage"
+             Title="FilmsPage"
+             x:Name="FilmPage">
+    <ContentPage.Resources>
+        <Style x:Key="pageNumberBoxStyle" TargetType="BoxView">
+            <Setter Property="Color" Value="{StaticResource Primary}"/>
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+        <Style x:Key="pageNumberStyle" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="TextColor" Value="{StaticResource Background}"/>
+        </Style>
+    </ContentPage.Resources>
+    <Grid Margin="90,25,90,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="1*" />
+
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="1" RowSpacing="50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <VerticalStackLayout  Grid.Row="0">
+
+                <Label 
+                    Text="Films Page"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    StyleClass="Title"/>
+                <Entry x:Name="filmSearch"
+                   Placeholder="Search For Film"
+                   Text="{Binding Path=SearchQuery, Mode=TwoWay}"/>
+                <Button Text="Search"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Command="{Binding SearchCommand}"/>
+            </VerticalStackLayout>
+            <ScrollView Grid.Row="1" VerticalOptions="FillAndExpand">
+                <Grid>
+                    <CollectionView x:Name="ResultsContent" ItemsSource="{Binding Results}"  IsVisible="{Binding IsRenderingNormalState}" HorizontalOptions="Center">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+
+                                <VerticalStackLayout Spacing="5" Margin="0,5,0,5">
+                                    <VerticalStackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnTapped"/>
+                                    </VerticalStackLayout.GestureRecognizers>
+                                    <Label Text="Title" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Title}" FontAttributes="Italic"/>
+                                    <Label Text="Release Date" FontAttributes="Bold" />
+                                    <Label Text="{Binding ReleaseDate}" FontAttributes="Italic" />
+                                </VerticalStackLayout>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Label x:Name="ErrorMessageLabel" IsVisible="{Binding IsRenderingErrorState}" Text="{Binding ErrorStateMessage}" HorizontalOptions="Center"/>
+                </Grid>
+            </ScrollView>
+            <FlexLayout HorizontalOptions="Center" Grid.Row="2" JustifyContent="SpaceAround">
+                <Button Text="Last Page" Command="{Binding PreviousPageCommand}"/>
+                <Grid WidthRequest="200">
+                    <BoxView Style="{StaticResource pageNumberBoxStyle}"/>
+                    <Label Text="{Binding PageNumberText}" Style="{StaticResource pageNumberStyle}"/>
+                </Grid>
+
+                <Button Text="Next Page" Command="{Binding NextPageCommand}"/>
+            </FlexLayout>
+        </Grid>
+         
+
+    </Grid>
+</ContentPage>

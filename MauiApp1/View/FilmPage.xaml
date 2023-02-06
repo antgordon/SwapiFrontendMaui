@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
+             x:Class="MauiApp1.View.FilmPage"
+             Title="FilmPage"
+             x:Name="page">
+        <Grid MaximumHeightRequest="600" MaximumWidthRequest="400">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <VerticalStackLayout Grid.Row="0" Spacing="10"  HorizontalOptions="Center">
+            <Label Text="{Binding Title}"/>
+            <Label Text="{Binding ReleaseDate}"/>
+            <Label Text="{Binding Source={x:Reference page}, Path=FilmId}"/>
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout Grid.Row="1" Grid.Column="0" HorizontalOptions="Center">
+            <Label Text="{Binding OpeningCrawl}" />
+        </HorizontalStackLayout>
+
+        <VerticalStackLayout Grid.Row="2" HorizontalOptions="Center">
+            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto, Auto">
+                <Label Text="Credits" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
+                <Label Text="Director" Grid.Row="1" Grid.Column="0"/>
+                <Label Text="{Binding Director}" Grid.Row="1" Grid.Column="1"/>
+                <Label Text="Producer" Grid.Row="2" Grid.Column="0"/>
+                <Label Text="{Binding Producer}" Grid.Row="2" Grid.Column="1"/>
+            </Grid>
+        </VerticalStackLayout>
+        <Button Text="Back" Clicked="BackOut" Grid.Row="3"/>
+    </Grid>
+</ContentPage>
