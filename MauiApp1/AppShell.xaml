@@ -13,39 +13,37 @@
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
         <ShellContent
-        Title="Alternative"
-        ContentTemplate="{DataTemplate local:Alternative}"
-        Route="Alternative" />
-
-        <ShellContent
-        Title="AboutBinding"
-        ContentTemplate="{DataTemplate view:AboutBinding}"
-        Route="AboutBinding" />
-
-        <ShellContent
         Title="Films"
         ContentTemplate="{DataTemplate view:FilmsPage}"
         Route="Films" />
+        <ShellContent
+        Title="Planets"
+        ContentTemplate="{DataTemplate view:AboutBinding}"
+        Route="Planets" />
         <ShellContent
         Title="People"
         ContentTemplate="{DataTemplate view:AboutBinding}"
         Route="People" />
         <ShellContent
-        Title="Planets"
+        Title="Spaceships"
         ContentTemplate="{DataTemplate view:AboutBinding}"
-        Route="Planets" />
+        Route="Spaceships" />
         <ShellContent
-        Title="Planets"
+        Title="Species"
         ContentTemplate="{DataTemplate view:AboutBinding}"
-        Route="Planets" />
-        <ShellContent
-        Title="Starships"
-        ContentTemplate="{DataTemplate view:AboutBinding}"
-        Route="Starships" />
+        Route="Species" />
         <ShellContent
         Title="Vehicles"
         ContentTemplate="{DataTemplate view:AboutBinding}"
         Route="Vehicles" />
+        <ShellContent
+        Title="Alternative"
+        ContentTemplate="{DataTemplate local:Alternative}"
+        Route="Alternative" />
+        <ShellContent
+        Title="AboutBinding"
+        ContentTemplate="{DataTemplate view:AboutBinding}"
+        Route="AboutBinding" />
 
     </TabBar>
 </Shell>

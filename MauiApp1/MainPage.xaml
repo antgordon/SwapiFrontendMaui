@@ -1,47 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.MainPage">
+             x:Class="MauiApp1.MainPage"
+             x:Name="Page"
+             >
+    <Grid BindingContext="{x:Reference Name=Page}" 
+        RowDefinitions="1*,1*, 1*"
+        ColumnDefinitions="1*, 1*, 1*"
+        Margin="50, 50"
+        RowSpacing="50"
+        ColumnSpacing="50"
+        >
+        <Label Grid.Row="0" Grid.Column="0" StyleClass="Title" Text="Swap Dev Front End" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="3"/>
+        <Button Grid.Row="1" Grid.Column="0" Text="Films" Command="{Binding NavigationCommand}"  CommandParameter="///Films"/>
+        <Button Grid.Row="1" Grid.Column="1" Text="Planets" Command="{Binding NavigationCommand}"  CommandParameter="///Planets"/>
+        <Button Grid.Row="1" Grid.Column="2" Text="People" Command="{Binding NavigationCommand}"  CommandParameter="///People"/>
+        <Button Grid.Row="2" Grid.Column="0" Text="Spaceships" Command="{Binding NavigationCommand}"  CommandParameter="///Spaceships"/>
+        <Button Grid.Row="2" Grid.Column="1" Text="Species" Command="{Binding NavigationCommand}"  CommandParameter="///Species"/>
+        <Button Grid.Row="2" Grid.Column="2" Text="Vehicles" Command="{Binding NavigationCommand}"  CommandParameter="///Vehicles"/>
+    </Grid>
 
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="NavigationBtn"
-                Text="Navigate to page"
-                Clicked="OnNavigateClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
 
 </ContentPage>
