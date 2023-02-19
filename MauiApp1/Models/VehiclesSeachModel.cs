@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.Models
 {
-    public class FilmSearchModel : BasicSearchModel<FilmModel>
+    public class VehiclesSeachModel : BasicSearchModel<VehiclesModel>
     {
 
     }

@@ -23,12 +23,12 @@ public class FilmSearchViewModel : INotifyPropertyChanged
     private int _page = 1;
     private bool _hasNextPage;
     private bool _hasPreviousPage;
-    private SwapiApiService _service;
+    private ISwapiApiService _service;
 
-    public FilmSearchViewModel()
+    public FilmSearchViewModel(ISwapiApiService service)
     {
         _results = new ObservableCollection<FilmViewModel>();
-        _service = new SwapiApiService();
+        _service = service;
         SearchCommand = new Command(
 
             execute: async () =>

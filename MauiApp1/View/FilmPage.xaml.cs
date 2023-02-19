@@ -11,9 +11,13 @@ public partial class FilmPage : ContentPage, IQueryAttributable
 
     public string FilmId { get; private set; }
 
+    private ISwapiApiService _swapiApiService;
+
     public FilmPage()
 	{
-		InitializeComponent();
+        _swapiApiService = App.SwapiApiService;
+
+        InitializeComponent();
         ViewModel = new FilmViewModel()
         {
             Title = "Last Jedi",
@@ -29,20 +33,17 @@ public partial class FilmPage : ContentPage, IQueryAttributable
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         FilmId = query["FilmId"] as string;
-        var e = 1 + 1;
     }
     protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         var id = FilmId;
         IsBusy = true;
-        var film = await SwapiApiService.INSTANCE.GetFilm(FilmId);
+        var film = await _swapiApiService.GetFilm(FilmId);
         ViewModel = new FilmViewModel(film);
         BindingContext = ViewModel;
         IsBusy = false;
-        var e = 1 + 1;
         //await ViewModel.InitializeAsync();
     }
-
 
 
     async void BackOut(object sender, EventArgs args) {

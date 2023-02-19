@@ -4,18 +4,9 @@
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
              x:Class="MauiApp1.View.FilmPage"
-             Title="FilmPage"
+             Title="Films"
              x:Name="page">
-        <Grid MaximumHeightRequest="600" MaximumWidthRequest="400">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid MaximumHeightRequest="600" MaximumWidthRequest="400" RowDefinitions="*,*,*" ColumnDefinitions="*">
         <VerticalStackLayout Grid.Row="0" Spacing="10"  HorizontalOptions="Center">
             <Label Text="{Binding Title}"/>
             <Label Text="{Binding ReleaseDate}"/>

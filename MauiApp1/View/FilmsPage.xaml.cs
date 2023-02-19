@@ -1,4 +1,5 @@
 using MauiApp1.Models;
+using MauiApp1.Services;
 using MauiApp1.ViewModel;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ public partial class FilmsPage : ContentPage
 	public FilmsPage()
 	{
 		InitializeComponent();
-		ViewModel = new FilmSearchViewModel();
+		ViewModel = new FilmSearchViewModel(App.SwapiApiService);
 		BindingContext = ViewModel;
     }
 

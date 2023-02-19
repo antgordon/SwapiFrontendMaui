@@ -11,7 +11,7 @@
         RowSpacing="50"
         ColumnSpacing="50"
         >
-        <Label Grid.Row="0" Grid.Column="0" StyleClass="Title" Text="Swap Dev Front End" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="3"/>
+        <Label Grid.Row="0" Grid.Column="0" StyleClass="Title" Text="SwapiDev Front End" HorizontalOptions="Center" VerticalOptions="Center" Grid.ColumnSpan="3"/>
         <Button Grid.Row="1" Grid.Column="0" Text="Films" Command="{Binding NavigationCommand}"  CommandParameter="///Films"/>
         <Button Grid.Row="1" Grid.Column="1" Text="Planets" Command="{Binding NavigationCommand}"  CommandParameter="///Planets"/>
         <Button Grid.Row="1" Grid.Column="2" Text="People" Command="{Binding NavigationCommand}"  CommandParameter="///People"/>
