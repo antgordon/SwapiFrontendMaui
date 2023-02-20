@@ -22,7 +22,7 @@
         Route="Planets" />
         <ShellContent
         Title="People"
-        ContentTemplate="{DataTemplate view:AboutBinding}"
+        ContentTemplate="{DataTemplate view:PeopleSearchPage}"
         Route="People" />
         <ShellContent
         Title="Spaceships"

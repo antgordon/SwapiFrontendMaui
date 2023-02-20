@@ -1,4 +1,5 @@
-﻿using MauiApp1.Services;
+﻿using MauiApp1.Models;
+using MauiApp1.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,11 +9,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System.Windows.Input;
 
 namespace MauiApp1.ViewModel;
 
-public class FilmSearchViewModel : INotifyPropertyChanged
+public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
+    where S : BasicSearchModel<T>
 {
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,20 +21,30 @@ public class FilmSearchViewModel : INotifyPropertyChanged
       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
     private string _searchQuery;
-    private ObservableCollection<FilmViewModel> _results;
+    private ObservableCollection<V> _results;
     private int _page = 1;
     private bool _hasNextPage;
     private bool _hasPreviousPage;
     private ISwapiApiService _service;
 
-    public FilmSearchViewModel(ISwapiApiService service)
+    public AbstractSearchViewModel(ISwapiApiService service)
     {
-        _results = new ObservableCollection<FilmViewModel>();
+        _results = new ObservableCollection<V>();
         _service = service;
         SearchCommand = new Command(
 
             execute: async () =>
             {
+                this.Results.Clear();
+                /*Results.Add(new FilmViewModel()
+                {
+                    Title = "Last Jedi",
+                    ReleaseDate = new DateTime(2020, 6, 1).ToShortDateString(),
+                    Director = "Director",
+                    Producer = "Producer"
+
+                });*/
+              
                 await LoanDataAsync();
                 RefreshCanExecutes();
                 
@@ -71,6 +82,11 @@ public class FilmSearchViewModel : INotifyPropertyChanged
                return (HasErrorState && Page > 1) || (!HasErrorState && HasPreviousPage);
            }
         );
+
+        OpenItemCommand = new Command<string>( async (string path) => 
+        {
+            await Shell.Current.GoToAsync(path);
+        });
     }
 
 
@@ -84,19 +100,17 @@ public class FilmSearchViewModel : INotifyPropertyChanged
     {
         try
         {
-            var results = await _service.SearchFilms(SearchQuery, Page);
+            var results = await GetSearchModel(_service, SearchQuery, Page);
             ClearErrorState();
             this.Results.Clear();
-            foreach (var item in results.Results)
+            var models = await GetElementModels(results);
+            foreach (var model in models)
             {
-
-                this.Results.Add(new FilmViewModel(item));
+                this.Results.Add(model);
             }
 
-            //HasPreviousPage = results.Previous != null;
-            //HasNextPage = results.Next != null;
-            HasNextPage = true;
-            HasPreviousPage = true;
+            HasPreviousPage = results.Previous != null;
+            HasNextPage = results.Next != null;
             OnPropertyChanged(nameof(HasPreviousPage));
             OnPropertyChanged(nameof(HasNextPage));
         } 
@@ -120,7 +134,7 @@ public class FilmSearchViewModel : INotifyPropertyChanged
         }
     }
 
-    public ObservableCollection<FilmViewModel> Results
+    public ObservableCollection<V> Results
     {
         get => _results;
         set
@@ -192,6 +206,8 @@ public class FilmSearchViewModel : INotifyPropertyChanged
 
     public ICommand NextPageCommand { private set; get; }
 
+    public ICommand OpenItemCommand { private set; get; }
+
     public void SetErrorState(string errorMessage)
     {
         HasErrorState = true;
@@ -218,5 +234,10 @@ public class FilmSearchViewModel : INotifyPropertyChanged
         (PreviousPageCommand as Command).ChangeCanExecute();
         (NextPageCommand as Command).ChangeCanExecute();
     }
+
+
+    protected abstract Task<S> GetSearchModel(ISwapiApiService swapiApiService, string searchQuery, int page);
+
+    protected abstract Task<IEnumerable<V>> GetElementModels(S searchModel);
 }
 

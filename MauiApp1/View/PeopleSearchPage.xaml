@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.View.FilmsPage"
-             Title="Films"
-             x:Name="FilmPage">
+             x:Class="MauiApp1.View.PeopleSearchPage"
+             Title="People"
+             x:Name="PeoplePage">
     <ContentPage.Resources>
         <Style x:Key="pageNumberBoxStyle" TargetType="BoxView">
             <Setter Property="Color" Value="{StaticResource Primary}"/>
@@ -38,12 +38,12 @@
             <VerticalStackLayout  Grid.Row="0">
 
                 <Label 
-                    Text="Films Page"
+                    Text="People Page"
                     VerticalOptions="Center" 
                     HorizontalOptions="Center"
                     StyleClass="Title"/>
-                <Entry x:Name="filmSearch"
-                   Placeholder="Search For Film"
+                <Entry x:Name="peopleSearch"
+                   Placeholder="Search For People"
                    Text="{Binding Path=SearchQuery, Mode=TwoWay}"/>
                 <Button Text="Search"
                     VerticalOptions="Center"
@@ -60,10 +60,8 @@
                                     <VerticalStackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnTapped"/>
                                     </VerticalStackLayout.GestureRecognizers>
-                                    <Label Text="Title" FontAttributes="Bold"/>
-                                    <Label Text="{Binding Title}" FontAttributes="Italic"/>
-                                    <Label Text="Release Date" FontAttributes="Bold" />
-                                    <Label Text="{Binding ReleaseDate}" FontAttributes="Italic" />
+                                    <Label Text="Name" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Name}" FontAttributes="Italic"/>
                                 </VerticalStackLayout>
 
                             </DataTemplate>
@@ -82,7 +80,5 @@
                 <Button Text="Next Page" Command="{Binding NextPageCommand}"/>
             </FlexLayout>
         </Grid>
-         
-
     </Grid>
 </ContentPage>
