@@ -21,6 +21,8 @@ public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
       PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
     private string _searchQuery;
+    private Guid _taskGuid;
+    private bool _loadingResults;
     private ObservableCollection<V> _results;
     private int _page = 1;
     private bool _hasNextPage;
@@ -36,16 +38,7 @@ public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
             execute: async () =>
             {
                 this.Results.Clear();
-                /*Results.Add(new FilmViewModel()
-                {
-                    Title = "Last Jedi",
-                    ReleaseDate = new DateTime(2020, 6, 1).ToShortDateString(),
-                    Director = "Director",
-                    Producer = "Producer"
-
-                });*/
-              
-                await LoanDataAsync();
+                LoanDataAsync();
                 RefreshCanExecutes();
                 
             },
@@ -56,11 +49,11 @@ public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
         );
         NextPageCommand = new Command(
 
-           execute: async () =>
+           execute:  () =>
            {
                Page += 1;
           
-               await LoanDataAsync();
+               LoanDataAsync();
                RefreshCanExecutes();
            },
            canExecute: () =>
@@ -70,12 +63,12 @@ public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
         );
         PreviousPageCommand = new Command(
 
-           execute: async () =>
+           execute: () =>
            {
                Page -= 1;
 
-               await LoanDataAsync();
-               RefreshCanExecutes();
+               LoanDataAsync();
+            
            },
            canExecute: () =>
            {
@@ -93,31 +86,25 @@ public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
     public async Task InitializeAsync()
     {
 
-        await LoanDataAsync();
+        LoanDataAsync();
     }
 
-    public async Task LoanDataAsync()
+    public void LoanDataAsync()
     {
-        try
-        {
-            var results = await GetSearchModel(_service, SearchQuery, Page);
-            ClearErrorState();
-            this.Results.Clear();
-            var models = await GetElementModels(results);
-            foreach (var model in models)
-            {
-                this.Results.Add(model);
-            }
+        var searchTask = GetSearchModel(_service, SearchQuery, Page);
+        _taskGuid = Guid.NewGuid();
+        _loadingResults = true;
+        OnPropertyChanged(nameof(IsLoadingResults));
 
-            HasPreviousPage = results.Previous != null;
-            HasNextPage = results.Next != null;
-            OnPropertyChanged(nameof(HasPreviousPage));
-            OnPropertyChanged(nameof(HasNextPage));
-        } 
-        catch(Exception ex)
+        var taskId = _taskGuid;
+
+        searchTask.ContinueWith(async task =>
         {
-            SetErrorState(ex.Message);
-        }
+            await MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                return ProcessSeachResults(taskId, task);
+            });
+        });
     }
 
 
@@ -197,8 +184,8 @@ public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
 
     public bool HasErrorState { get; private set; }
     public string ErrorStateMessage { get; private set; }
-    public bool IsRenderingErrorState { get => HasErrorState; }
-    public bool IsRenderingNormalState { get => !HasErrorState; }
+    public bool IsRenderingErrorState { get => HasErrorState && !IsLoadingResults; }
+    public bool IsRenderingNormalState { get => !HasErrorState && !IsLoadingResults; }
 
     public ICommand SearchCommand { private set; get; }
 
@@ -207,6 +194,8 @@ public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
     public ICommand NextPageCommand { private set; get; }
 
     public ICommand OpenItemCommand { private set; get; }
+
+    public bool IsLoadingResults { get => _loadingResults; }
 
     public void SetErrorState(string errorMessage)
     {
@@ -235,6 +224,37 @@ public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
         (NextPageCommand as Command).ChangeCanExecute();
     }
 
+    private async Task ProcessSeachResults(Guid taskGuid, Task<S> searchResultTask)
+    {
+        if (_taskGuid == taskGuid)
+        {
+            try
+            {
+                var searchResult = searchResultTask.Result;
+                this.Results.Clear();
+                _loadingResults = false;
+                OnPropertyChanged(nameof(IsLoadingResults));
+                ClearErrorState();
+                var models = await GetElementModels(searchResult);
+                foreach (var model in models)
+                {
+                    this.Results.Add(model);
+                }
+
+                HasPreviousPage = searchResult.Previous != null;
+                HasNextPage = searchResult.Next != null;
+                OnPropertyChanged(nameof(HasPreviousPage));
+                OnPropertyChanged(nameof(HasNextPage));
+                RefreshCanExecutes();
+            }
+            catch (Exception ex)
+            {
+                _loadingResults = false;
+                OnPropertyChanged(nameof(IsLoadingResults));
+                SetErrorState(ex.Message);
+            }
+        }
+    }
 
     protected abstract Task<S> GetSearchModel(ISwapiApiService swapiApiService, string searchQuery, int page);
 

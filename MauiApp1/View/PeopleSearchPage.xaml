@@ -68,6 +68,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                     <Label x:Name="ErrorMessageLabel" IsVisible="{Binding IsRenderingErrorState}" Text="{Binding ErrorStateMessage}" HorizontalOptions="Center"/>
+                    <ActivityIndicator IsVisible="{Binding IsLoadingResults}" IsRunning="{Binding IsLoadingResults}"/>
                 </Grid>
             </ScrollView>
             <FlexLayout HorizontalOptions="Center" Grid.Row="2" JustifyContent="SpaceAround">
