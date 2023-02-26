@@ -10,10 +10,10 @@ namespace MauiApp1.View;
 public partial class PeopleSearchPage : ContentPage
 {
 
-	public PeopleSearchViewModel ViewModel { get; private set; }
+    public PeopleSearchViewModel ViewModel { get; private set; }
 
-	public PeopleSearchPage()
-	{
+    public PeopleSearchPage()
+    {
         ViewModel = new PeopleSearchViewModel(App.SwapiApiService);
         BindingContext = ViewModel;
         InitializeComponent();
@@ -22,7 +22,7 @@ public partial class PeopleSearchPage : ContentPage
 
 
     public async void OnTapped(object sender, EventArgs args) {
-		var model = ((PeopleViewModel)((VerticalStackLayout)sender).BindingContext);
+        var model = ((PeopleViewModel)((VerticalStackLayout)sender).BindingContext);
         ViewModel.OpenItemCommand.Execute($"People?PeopleId={model.EntityId}");
 
     }

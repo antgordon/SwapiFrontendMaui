@@ -17,7 +17,7 @@ public partial class AboutBinding : ContentPage
     }
 
     public AboutBinding()
-	{
+    {
         if (QueryText == null) {
             QueryText = "Default";
         }

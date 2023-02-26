@@ -10,17 +10,17 @@ namespace MauiApp1.View;
 public partial class FilmsPage : ContentPage
 {
 
-	public FilmSearchViewModel ViewModel { get; private set; }
-	public FilmsPage()
-	{
-		InitializeComponent();
-		ViewModel = new FilmSearchViewModel(App.SwapiApiService);
-		BindingContext = ViewModel;
+    public FilmSearchViewModel ViewModel { get; private set; }
+    public FilmsPage()
+    {
+        InitializeComponent();
+        ViewModel = new FilmSearchViewModel(App.SwapiApiService);
+        BindingContext = ViewModel;
     }
 
 
     public async void OnTapped(object sender, EventArgs args) {
-		var model = ((FilmViewModel)((VerticalStackLayout)sender).BindingContext);
+        var model = ((FilmViewModel)((VerticalStackLayout)sender).BindingContext);
          await Shell.Current.GoToAsync($"Film?FilmId={model.EntityId}");
-	}
+    }
 }

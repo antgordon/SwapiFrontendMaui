@@ -14,7 +14,7 @@ public partial class FilmPage : ContentPage, IQueryAttributable
     private ISwapiApiService _swapiApiService;
 
     public FilmPage()
-	{
+    {
         _swapiApiService = App.SwapiApiService;
 
         InitializeComponent();

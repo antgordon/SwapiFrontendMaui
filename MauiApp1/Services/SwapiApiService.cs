@@ -1,4 +1,5 @@
 ﻿using MauiApp1.Models;
+using MauiApp1.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,10 @@ namespace MauiApp1.Services
         {
             PropertyNameCaseInsensitive = true,
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            NumberHandling = JsonNumberHandling.AllowReadingFromString
+            NumberHandling = JsonNumberHandling.AllowReadingFromString,
+            Converters = { 
+                new ExtendedDoubleJsonConverter()
+            }
 
         };
 

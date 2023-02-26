@@ -10,8 +10,8 @@ namespace MauiApp1.Models
     {
 
         public string Name { get; set; }
-        public int Height { get; set; }
-        public int Mass { get; set; }
+        public double? Height { get; set; }
+        public double? Mass { get; set; }
         public string Hair_Color { get; set; }
         public string Skin_Color { get; set; }
         public string Gender { get; set; }

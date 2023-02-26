@@ -4,8 +4,8 @@ namespace MauiApp1;
 
 public partial class AppShell : Shell
 {
-	public AppShell()
-	{
+    public AppShell()
+    {
 
         InitializeComponent();
         //Routing.RegisterRoute("Film", typeof(FilmPage));
