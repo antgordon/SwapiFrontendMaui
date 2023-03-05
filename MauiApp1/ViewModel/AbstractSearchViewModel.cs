@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace MauiApp1.ViewModel;
 
-public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
+public abstract class AbstractSearchViewModel<S,T,V> : INotifyPropertyChanged
     where S : BasicSearchModel<T>
 {
     public event PropertyChangedEventHandler PropertyChanged;
@@ -28,6 +28,8 @@ public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
     private bool _hasNextPage;
     private bool _hasPreviousPage;
     private ISwapiApiService _service;
+    private string _title;
+    private string _searchPlaceHolder;
 
     public AbstractSearchViewModel(ISwapiApiService service)
     {
@@ -107,6 +109,32 @@ public abstract class AbstractSearchViewModel<S,T, V> : INotifyPropertyChanged
         });
     }
 
+
+    public string Title
+    {
+        get => _title;
+        set
+        {
+            if (_title != value)
+            {
+                _title = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public string SearchPlaceHolder
+    {
+        get => _searchPlaceHolder;
+        set
+        {
+            if (_searchPlaceHolder != value)
+            {
+                _searchPlaceHolder = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public string SearchQuery
     {

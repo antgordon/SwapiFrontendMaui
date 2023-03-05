@@ -18,7 +18,7 @@
         Route="Films" />
         <ShellContent
         Title="Planets"
-        ContentTemplate="{DataTemplate view:AboutBinding}"
+        ContentTemplate="{DataTemplate view:PlanetSearchPage}"
         Route="Planets" />
         <ShellContent
         Title="People"

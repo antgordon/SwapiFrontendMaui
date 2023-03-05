@@ -36,14 +36,13 @@
             </Grid.ColumnDefinitions>
 
             <VerticalStackLayout  Grid.Row="0">
-
                 <Label 
-                    Text="People Page"
+                    Text="{Binding Source={x:Reference PeoplePage}, Path=Title}"
                     VerticalOptions="Center" 
                     HorizontalOptions="Center"
                     StyleClass="Title"/>
-                <Entry x:Name="peopleSearch"
-                   Placeholder="Search For People"
+                <Entry x:Name="searchText"
+                   Placeholder="{Binding Source={x:Reference PeoplePage}, Path=Title}"
                    Text="{Binding Path=SearchQuery, Mode=TwoWay}"/>
                 <Button Text="Search"
                     VerticalOptions="Center"
@@ -55,15 +54,12 @@
                     <CollectionView x:Name="ResultsContent" ItemsSource="{Binding Results}"  IsVisible="{Binding IsRenderingNormalState}" HorizontalOptions="Center">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-
                                 <VerticalStackLayout Spacing="5" Margin="0,5,0,5">
                                     <VerticalStackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnTapped"/>
                                     </VerticalStackLayout.GestureRecognizers>
-                                    <Label Text="Name" FontAttributes="Bold"/>
                                     <Label Text="{Binding Name}" FontAttributes="Italic"/>
                                 </VerticalStackLayout>
-
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -77,7 +73,6 @@
                     <BoxView Style="{StaticResource pageNumberBoxStyle}"/>
                     <Label Text="{Binding PageNumberText}" Style="{StaticResource pageNumberStyle}"/>
                 </Grid>
-
                 <Button Text="Next Page" Command="{Binding NextPageCommand}"/>
             </FlexLayout>
         </Grid>

@@ -3,6 +3,7 @@ using MauiApp1.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -52,13 +53,9 @@ namespace MauiApp1.Services
             var response = await _client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
-            var options = new JsonSerializerOptions()
-            {
-                PropertyNameCaseInsensitive = true,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            };
-            var result = JsonSerializer.Deserialize<FilmModel>(content, options);
-
+            var result = JsonSerializer.Deserialize<FilmModel>(content, _serializationOptions);
+            var suffix = result.Url.Substring(result.Url.LastIndexOf("films/") + "films/".Length);
+            result.EntityId = suffix.Substring(0, suffix.Length - 1);
             return result;
 
         }
@@ -83,7 +80,8 @@ namespace MauiApp1.Services
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<VehiclesModel>(content, _serializationOptions);
-
+            var suffix = result.Url.Substring(result.Url.LastIndexOf("vehicles/") + "vehicles/".Length);
+            result.EntityId = suffix.Substring(0, suffix.Length - 1);
             return result;
         }
 
@@ -106,7 +104,8 @@ namespace MauiApp1.Services
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<PeopleModel>(content, _serializationOptions);
-
+            var suffix = result.Url.Substring(result.Url.LastIndexOf("people/") + "people/".Length);
+            result.EntityId = suffix.Substring(0, suffix.Length - 1);
             return result;
         }
 
@@ -129,7 +128,8 @@ namespace MauiApp1.Services
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<StarshipModel>(content, _serializationOptions);
-
+            var suffix = result.Url.Substring(result.Url.LastIndexOf("starships/") + "starships/".Length);
+            result.EntityId = suffix.Substring(0, suffix.Length - 1);
             return result;
         }
 
@@ -152,7 +152,8 @@ namespace MauiApp1.Services
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<SpeciesModel>(content, _serializationOptions);
-
+            var suffix = result.Url.Substring(result.Url.LastIndexOf("species/") + "species/".Length);
+            result.EntityId = suffix.Substring(0, suffix.Length - 1);
             return result;
         }
 
@@ -175,7 +176,8 @@ namespace MauiApp1.Services
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<PlanetModel>(content, _serializationOptions);
-
+            var suffix = result.Url.Substring(result.Url.LastIndexOf("planets/") + "peoples/".Length);
+            result.EntityId = suffix.Substring(0, suffix.Length - 1);
             return result;
         }
     }

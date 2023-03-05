@@ -8,7 +8,7 @@ public partial class AppShell : Shell
     {
 
         InitializeComponent();
-        //Routing.RegisterRoute("Film", typeof(FilmPage));
+        Routing.RegisterRoute("Film", typeof(FilmPage));
         //this.BackgroundColor = Color.FromRgb(255, 255, 0);
     }
 }

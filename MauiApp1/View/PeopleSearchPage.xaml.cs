@@ -20,7 +20,6 @@ public partial class PeopleSearchPage : ContentPage
 
     }
 
-
     public async void OnTapped(object sender, EventArgs args) {
         var model = ((PeopleViewModel)((VerticalStackLayout)sender).BindingContext);
         ViewModel.OpenItemCommand.Execute($"People?PeopleId={model.EntityId}");

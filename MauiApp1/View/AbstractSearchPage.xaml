@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiApp1.View.FilmsPage"
-             Title="Films"
-             x:Name="FilmPage">
-    <ContentPage.Resources>
+             x:Class="MauiApp1.View.AbstractSearchPage"
+             x:Name="SearchPage">
+    <ContentView.Resources>
         <Style x:Key="pageNumberBoxStyle" TargetType="BoxView">
             <Setter Property="Color" Value="{StaticResource Primary}"/>
             <Setter Property="CornerRadius" Value="5"/>
@@ -14,7 +13,7 @@
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="TextColor" Value="{StaticResource Background}"/>
         </Style>
-    </ContentPage.Resources>
+    </ContentView.Resources>
     <Grid Margin="90,25,90,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -38,12 +37,12 @@
             <VerticalStackLayout  Grid.Row="0" Spacing="10" Margin="0,5,0,5">
 
                 <Label 
-                    Text="Films Page"
+                    Text="{Binding Title}"
                     VerticalOptions="Center" 
                     HorizontalOptions="Center"
                     StyleClass="Title"/>
-                <Entry x:Name="filmSearch"
-                   Placeholder="Search For Film"
+                <Entry x:Name="searchText"
+                   Placeholder="{Binding SearchPlaceHolder}"
                    Text="{Binding Path=SearchQuery, Mode=TwoWay}"/>
                 <Button Text="Search"
                     VerticalOptions="Center"
@@ -59,11 +58,6 @@
                                     <AbsoluteLayout.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnTapped"/>
                                     </AbsoluteLayout.GestureRecognizers>
-                                    
-                                    <VerticalStackLayout Spacing="5" Margin="0,5,0,5">
-                                        <Label Text="{Binding Title}" FontAttributes="Bold"/>
-                                        <Label Text="{Binding ReleaseDate}" FontAttributes="Italic" />
-                                    </VerticalStackLayout>
                                 </AbsoluteLayout>
 
                             </DataTemplate>
@@ -82,7 +76,7 @@
                 <Button Text="Next Page" Command="{Binding NextPageCommand}"/>
             </FlexLayout>
         </Grid>
-         
+
 
     </Grid>
-</ContentPage>
+</ContentView>

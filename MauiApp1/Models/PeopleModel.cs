@@ -23,5 +23,6 @@ namespace MauiApp1.Models
         public DateTime Created { get; set; }
         public DateTime Edited { get; set; }
         public string Url { get; set; }
+        public string EntityId { get; set; }
     }
 }

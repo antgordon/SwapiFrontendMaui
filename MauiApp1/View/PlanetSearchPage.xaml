@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.View.PlanetSearchPage"
+             xmlns:view="clr-namespace:MauiApp1.View"
+             x:Name="page"
+             Title="PlanetSearchPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="itemTemplate">
+                <VerticalStackLayout Spacing="5" Margin="0,5,0,5" >
+                    <Label Text="{Binding Name}" FontAttributes="Italic"/>
+                </VerticalStackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <view:AbstractSearchPage x:Name="SearchContent" ItemTemplate="{x:StaticResource itemTemplate}"/>
+
+</ContentPage>

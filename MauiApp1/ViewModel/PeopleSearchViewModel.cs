@@ -12,6 +12,8 @@ namespace MauiApp1.ViewModel
     {
         public PeopleSearchViewModel(ISwapiApiService service) : base(service)
         {
+            Title = "People Page";
+            SearchPlaceHolder = "Search For People";
         }
 
         protected override Task<IEnumerable<PeopleViewModel>> GetElementModels(PeopleSearchModel searchModel)

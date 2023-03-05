@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.ViewModel
 {
-    public class PeopleViewModel
+    public class PlanetViewModel
     {
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -19,15 +19,16 @@ namespace MauiApp1.ViewModel
 
         private string _name;
 
-        public PeopleViewModel() 
+        public PlanetViewModel() 
         { 
         
         }
 
-        public PeopleViewModel(PeopleModel model) 
+        public PlanetViewModel(PlanetModel model) 
         {
             EntityId = model.EntityId;
             Name = model.Name;
+
         }
 
         public string Name 
