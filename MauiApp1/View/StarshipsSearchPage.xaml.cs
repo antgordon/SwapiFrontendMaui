@@ -2,19 +2,18 @@ using MauiApp1.ViewModel;
 
 namespace MauiApp1.View;
 
-public partial class PlanetSearchPage : ContentPage
+public partial class StarshipsSearchPage : ContentPage
 {
+    public StarshipSearchViewModel ViewModel { get; private set; }
 
-    public PlanetSearchViewModel ViewModel { get; private set; }
-
-    public PlanetSearchPage()
-	{
-        ViewModel = new PlanetSearchViewModel(App.SwapiApiService);
+    public StarshipsSearchPage()
+    {
+        ViewModel = new StarshipSearchViewModel(App.SwapiApiService);
         BindingContext = ViewModel;
         InitializeComponent();
 
         SearchContent.ItemTapped += OnTapped;
-	}
+    }
 
     public async void OnTapped(object sender, EventArgs args)
     {

@@ -19,14 +19,6 @@ public partial class FilmsPage : ContentPage
         ViewModel = new FilmSearchViewModel(App.SwapiApiService);
         ItemView = new FilmSearchPageItemView();
         BindingContext = ViewModel;
-        var def = ResultsContent.ItemTemplate.LoadTemplate;
-        ResultsContent.ItemTemplate.LoadTemplate = () => {
-            var obj = def();
-            AbsoluteLayout layout = (AbsoluteLayout)obj;
-            var label = new Label() { Text = "LETTS GOOOO" };
-            layout.Children.Add(label);
-            return layout;
-        };
     }
 
 

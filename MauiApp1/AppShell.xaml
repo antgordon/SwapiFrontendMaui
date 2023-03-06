@@ -25,21 +25,17 @@
         ContentTemplate="{DataTemplate view:PeopleSearchPage}"
         Route="People" />
         <ShellContent
-        Title="Spaceships"
-        ContentTemplate="{DataTemplate view:AboutBinding}"
-        Route="Spaceships" />
+        Title="Starships"
+        ContentTemplate="{DataTemplate view:StarshipsSearchPage}"
+        Route="Starships" />
         <ShellContent
         Title="Species"
-        ContentTemplate="{DataTemplate view:AboutBinding}"
+        ContentTemplate="{DataTemplate view:SpeciesSearchPage}"
         Route="Species" />
         <ShellContent
         Title="Vehicles"
-        ContentTemplate="{DataTemplate view:AboutBinding}"
+        ContentTemplate="{DataTemplate view:VehiclesSearchPage}"
         Route="Vehicles" />
-        <ShellContent
-        Title="Alternative"
-        ContentTemplate="{DataTemplate local:Alternative}"
-        Route="Alternative" />
         <ShellContent
         Title="AboutBinding"
         ContentTemplate="{DataTemplate view:AboutBinding}"

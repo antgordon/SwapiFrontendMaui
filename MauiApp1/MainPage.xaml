@@ -15,7 +15,7 @@
         <Button Grid.Row="1" Grid.Column="0" Text="Films" Command="{Binding NavigationCommand}"  CommandParameter="///Films"/>
         <Button Grid.Row="1" Grid.Column="1" Text="Planets" Command="{Binding NavigationCommand}"  CommandParameter="///Planets"/>
         <Button Grid.Row="1" Grid.Column="2" Text="People" Command="{Binding NavigationCommand}"  CommandParameter="///People"/>
-        <Button Grid.Row="2" Grid.Column="0" Text="Spaceships" Command="{Binding NavigationCommand}"  CommandParameter="///Spaceships"/>
+        <Button Grid.Row="2" Grid.Column="0" Text="Starships" Command="{Binding NavigationCommand}"  CommandParameter="///Starships"/>
         <Button Grid.Row="2" Grid.Column="1" Text="Species" Command="{Binding NavigationCommand}"  CommandParameter="///Species"/>
         <Button Grid.Row="2" Grid.Column="2" Text="Vehicles" Command="{Binding NavigationCommand}"  CommandParameter="///Vehicles"/>
     </Grid>

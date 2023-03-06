@@ -24,7 +24,6 @@ namespace MauiApp1.Services
             Converters = { 
                 new ExtendedDoubleJsonConverter()
             }
-
         };
 
         public SwapiApiService() 
@@ -60,26 +59,26 @@ namespace MauiApp1.Services
 
         }
 
-        public async Task<VehiclesSeachModel> SearchVehicles(string query, int page = 1)
+        public async Task<VehiclesSearchModel?> SearchVehicles(string query, int page = 1)
         {
             string url = $"vehicles?search={Uri.EscapeDataString(query ?? "")}&page={page}";
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, url);
             var response = await _client.SendAsync(message);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
-            var result = JsonSerializer.Deserialize<VehiclesSeachModel>(content, _serializationOptions);
+            var result = JsonSerializer.Deserialize<VehiclesSearchModel>(content, _serializationOptions);
 
             return result;
         }
 
-        public async Task<VehiclesModel> GetVehicle(string id)
+        public async Task<VehicleModel> GetVehicle(string id)
         {
             string url = $"vehicles/{id}";
             var response = await _client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
 
-            var result = JsonSerializer.Deserialize<VehiclesModel>(content, _serializationOptions);
+            var result = JsonSerializer.Deserialize<VehicleModel>(content, _serializationOptions);
             var suffix = result.Url.Substring(result.Url.LastIndexOf("vehicles/") + "vehicles/".Length);
             result.EntityId = suffix.Substring(0, suffix.Length - 1);
             return result;
@@ -109,7 +108,7 @@ namespace MauiApp1.Services
             return result;
         }
 
-        public async Task<StarshipsSearchModel> SearchStarship(string query, int page = 1)
+        public async Task<StarshipsSearchModel> SearchStarships(string query, int page = 1)
         {
             string url = $"starships?search={Uri.EscapeDataString(query ?? "")}&page={page}";
             HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, url);

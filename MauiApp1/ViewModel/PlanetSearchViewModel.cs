@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace MauiApp1.ViewModel
 {
-    public class PlanetSearchViewModel : AbstractSearchViewModel<PlanetSearchModel, PlanetModel,PlanetViewModel>
+    public class PlanetSearchViewModel : AbstractSearchViewModel<PlanetSearchModel, PlanetModel, PlanetViewModel>
     {
         public PlanetSearchViewModel(ISwapiApiService service) : base(service)
         {
             Title = "Planet Page";
-            SearchPlaceHolder = "Search For Planets";
+            SearchPlaceHolder = "Search For Planet";
         }
 
         protected override Task<IEnumerable<PlanetViewModel>> GetElementModels(PlanetSearchModel searchModel)
