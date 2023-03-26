@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=netstandard"
              xmlns:scg="clr-namespace:System.Collections.Generic;assembly=netstandard"
-             x:Class="MauiApp1.View.FilmPage"
+             x:Class="MauiApp1.View.Entity.FilmPage"
              Title="Films"
              x:Name="page">
     <Grid MaximumHeightRequest="600" MaximumWidthRequest="400" RowDefinitions="*,*,*" ColumnDefinitions="*">

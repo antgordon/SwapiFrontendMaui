@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.View.Entity.VehiclePage"
+             Title="VehiclePage">
+    <Grid  MaximumHeightRequest="600" MaximumWidthRequest="400" RowDefinitions="*,*,*" ColumnDefinitions="*">
+        <VerticalStackLayout Grid.Row="0" Spacing="10"  HorizontalOptions="Center">
+            <Label Text="{Binding Name}"/>
+            <Label Text="{Binding Source={x:Reference page}, Path=EntityId}"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="1" HorizontalOptions="Center">
+            <Grid RowDefinitions="*,*,*,*,*,*,*,*,*,*,*" ColumnDefinitions="Auto, Auto">
+                <Label Text="Stats" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
+                <Label Text="Model" Grid.Row="1" Grid.Column="0"/>
+                <Label Text="{Binding Model}" Grid.Row="1" Grid.Column="1"/>
+                <Label Text="VehicleClass" Grid.Row="2" Grid.Column="0"/>
+                <Label Text="{Binding VehicleClass}" Grid.Row="2" Grid.Column="1"/>
+                <Label Text="Manufacturer" Grid.Row="3" Grid.Column="0"/>
+                <Label Text="{Binding Manufacturer}" Grid.Row="3" Grid.Column="1"/>
+                <Label Text="Length" Grid.Row="4" Grid.Column="0"/>
+                <Label Text="{Binding Length}" Grid.Row="4" Grid.Column="1"/>
+                <Label Text="Cost" Grid.Row="5" Grid.Column="0"/>
+                <Label Text="{Binding Cost}" Grid.Row="5" Grid.Column="1"/>
+                <Label Text="Crew" Grid.Row="6" Grid.Column="0"/>
+                <Label Text="{Binding Crew}" Grid.Row="6" Grid.Column="1"/>
+                <Label Text="Passengers" Grid.Row="7" Grid.Column="0"/>
+                <Label Text="{Binding Passengers}" Grid.Row="7" Grid.Column="1"/>
+                <Label Text="MaxAtmospheringSpeed" Grid.Row="8" Grid.Column="0"/>
+                <Label Text="{Binding MaxAtmospheringSpeed}" Grid.Row="8" Grid.Column="1"/>
+                <Label Text="CargoCapacity" Grid.Row="9" Grid.Column="0"/>
+                <Label Text="{Binding CargoCapacity}" Grid.Row="9" Grid.Column="1"/>
+                <Label Text="Consumables" Grid.Row="10" Grid.Column="0"/>
+                <Label Text="{Binding Consumables}" Grid.Row="10" Grid.Column="1"/>
+            </Grid>
+        </VerticalStackLayout>
+        <Button Text="Back" Clicked="BackOut" Grid.Row="3"/>
+    </Grid>
+</ContentPage>

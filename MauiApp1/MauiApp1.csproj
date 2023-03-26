@@ -49,6 +49,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="View\Entity\SpeciesPage.xaml.cs">
+	    <DependentUpon>SpeciesPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="View\PeopleSearchPage.xaml.cs">
 	    <DependentUpon>PeopleSearchPage.xaml</DependentUpon>
 	  </Compile>
@@ -70,7 +73,22 @@
 	  <MauiXaml Update="View\AbstractSearchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="View\FilmPage.xaml">
+	  <MauiXaml Update="View\Entity\FilmPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Entity\PeoplePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Entity\PlanetPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Entity\SpeciesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Entity\StarshipPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\Entity\VehiclePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\FilmSearchPageItemView.xaml">

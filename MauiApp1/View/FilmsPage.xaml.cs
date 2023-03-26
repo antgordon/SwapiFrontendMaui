@@ -1,6 +1,7 @@
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.ViewModel;
+using MauiApp1.ViewModel.Entity;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -23,7 +24,7 @@ public partial class FilmsPage : ContentPage
 
 
     public async void OnTapped(object sender, EventArgs args) {
-        var model = ((FilmViewModel)((BindableObject)sender).BindingContext);
-         await Shell.Current.GoToAsync($"Film?FilmId={model.EntityId}");
+        var model = (FilmViewModel)((BindableObject)sender).BindingContext;
+        await Shell.Current.GoToAsync($"FilmEntity?Id={model.EntityId}");
     }
 }

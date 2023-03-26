@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace MauiApp1.ViewModel
+namespace MauiApp1.ViewModel.Entity
 {
     public class FilmViewModel : INotifyPropertyChanged
     {
@@ -23,7 +23,7 @@ namespace MauiApp1.ViewModel
         private string _producer;
         private string _releaseDate;
 
-        public FilmViewModel() 
+        public FilmViewModel()
         {
         }
 

@@ -1,9 +1,9 @@
 using MauiApp1.Services;
-using MauiApp1.ViewModel;
+using MauiApp1.ViewModel.Entity;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MauiApp1.View;
+namespace MauiApp1.View.Entity;
 
 public partial class FilmPage : ContentPage, IQueryAttributable
 {
@@ -32,17 +32,16 @@ public partial class FilmPage : ContentPage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        FilmId = query["FilmId"] as string;
+        FilmId = query["Id"] as string;
     }
+
     protected async override void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        var id = FilmId;
         IsBusy = true;
         var film = await _swapiApiService.GetFilm(FilmId);
         ViewModel = new FilmViewModel(film);
         BindingContext = ViewModel;
         IsBusy = false;
-        //await ViewModel.InitializeAsync();
     }
 
 

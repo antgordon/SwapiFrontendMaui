@@ -1,5 +1,6 @@
 ﻿using MauiApp1.Models;
 using MauiApp1.Services;
+using MauiApp1.ViewModel.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

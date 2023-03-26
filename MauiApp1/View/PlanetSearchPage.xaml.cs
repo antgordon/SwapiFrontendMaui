@@ -1,4 +1,5 @@
 using MauiApp1.ViewModel;
+using MauiApp1.ViewModel.Entity;
 
 namespace MauiApp1.View;
 
@@ -18,7 +19,7 @@ public partial class PlanetSearchPage : ContentPage
 
     public async void OnTapped(object sender, EventArgs args)
     {
-        var model = ((PeopleViewModel)((VerticalStackLayout)sender).BindingContext);
-        ViewModel.OpenItemCommand.Execute($"People?PeopleId={model.EntityId}");
+        var model = (PlanetViewModel)((BindableObject)sender).BindingContext;
+        ViewModel.OpenItemCommand.Execute($"PlanetEntity?Id={model.EntityId}");
     }
 }

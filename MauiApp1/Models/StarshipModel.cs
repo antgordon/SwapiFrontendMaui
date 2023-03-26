@@ -9,16 +9,20 @@ namespace MauiApp1.Models
     public class StarshipModel
     {
         public string Name { get; set; }
-        public int Rotation_Period { get; set; }
-        public int Orbital_Period { get; set; }
-        public int Diameter { get; set; }
-        public string Climate { get; set; }
-        public string Gravity { get; set; }
-        public string Terrain { get; set; }
-        public string Surface_Water { get; set; }
-        public int Population { get; set; }
-        public IList<string> Residents { get; set; }
-        public IList<string> Films {get; set;}
+        public string Model { get; set; }
+        public string Manufacturer { get; set; }
+        public string Cost_In_Credits { get; set; }
+        public string Length { get; set; }
+        public string Max_Atmosphering_Speed { get; set; }
+        public string Crew { get; set; }
+        public string Passengers { get; set; }
+        public string Cargo_Capcity { get; set; }
+        public string Consumables { get; set; }
+        public string Hyperdrive_Rating { get; set; }
+        public string MGLT { get; set; }
+        public string Starship_Class { get; set; }
+        public IList<string> Pilots { get; set; }
+        public IList<string> Films { get; set; }
         public DateTime Created { get; set; }
         public DateTime Edited { get; set; }
         public string Url { get; set; }

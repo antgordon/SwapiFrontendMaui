@@ -22,7 +22,8 @@ namespace MauiApp1.Services
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             NumberHandling = JsonNumberHandling.AllowReadingFromString,
             Converters = { 
-                new ExtendedDoubleJsonConverter()
+                new ExtendedDoubleJsonConverter(),
+                new ExtendedIntJsonConverter()
             }
         };
 
@@ -41,20 +42,24 @@ namespace MauiApp1.Services
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<FilmSearchModel>(content, _serializationOptions);
-
+            foreach (var item in result.Results)
+            {
+                var suffix = item.Url.Substring(item.Url.LastIndexOf("films/") + "films/".Length);
+                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+            }
             return result;
         }
 
         public async Task<FilmModel?> GetFilm(string id)
         {
+            if (id == null) throw new ArgumentNullException(nameof(id));
             string url = $"films/{id}";
 
             var response = await _client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<FilmModel>(content, _serializationOptions);
-            var suffix = result.Url.Substring(result.Url.LastIndexOf("films/") + "films/".Length);
-            result.EntityId = suffix.Substring(0, suffix.Length - 1);
+            result.EntityId = id;
             return result;
 
         }
@@ -67,20 +72,24 @@ namespace MauiApp1.Services
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<VehiclesSearchModel>(content, _serializationOptions);
-
+            foreach (var item in result.Results)
+            {
+                var suffix = item.Url.Substring(item.Url.LastIndexOf("vehicles/") + "vehicles/".Length);
+                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+            }
             return result;
         }
 
         public async Task<VehicleModel> GetVehicle(string id)
         {
+            if (id == null) throw new ArgumentNullException(nameof(id));
             string url = $"vehicles/{id}";
             var response = await _client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<VehicleModel>(content, _serializationOptions);
-            var suffix = result.Url.Substring(result.Url.LastIndexOf("vehicles/") + "vehicles/".Length);
-            result.EntityId = suffix.Substring(0, suffix.Length - 1);
+            result.EntityId = id;
             return result;
         }
 
@@ -92,19 +101,24 @@ namespace MauiApp1.Services
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<PeopleSearchModel>(content, _serializationOptions);
+            foreach (var item in result.Results)
+            {
+                var suffix = item.Url.Substring(item.Url.LastIndexOf("people/") + "people/".Length);
+                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+            }
             return result;
         }
 
         public async Task<PeopleModel?> GetPeople(string id)
         {
+            if (id == null) throw new ArgumentNullException(nameof(id));
             string url = $"people/{id}";
             var response = await _client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<PeopleModel>(content, _serializationOptions);
-            var suffix = result.Url.Substring(result.Url.LastIndexOf("people/") + "people/".Length);
-            result.EntityId = suffix.Substring(0, suffix.Length - 1);
+            result.EntityId = id;
             return result;
         }
 
@@ -116,19 +130,24 @@ namespace MauiApp1.Services
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<StarshipsSearchModel>(content, _serializationOptions);
+            foreach (var item in result.Results)
+            {
+                var suffix = item.Url.Substring(item.Url.LastIndexOf("starships/") + "starships/".Length);
+                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+            }
             return result;
         }
 
         public async Task<StarshipModel> GetStarship(string id)
         {
+            if (id == null) throw new ArgumentNullException(nameof(id));
             string url = $"starships/{id}";
             var response = await _client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<StarshipModel>(content, _serializationOptions);
-            var suffix = result.Url.Substring(result.Url.LastIndexOf("starships/") + "starships/".Length);
-            result.EntityId = suffix.Substring(0, suffix.Length - 1);
+            result.EntityId = id;
             return result;
         }
 
@@ -140,19 +159,24 @@ namespace MauiApp1.Services
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<SpeciesSearchModel>(content, _serializationOptions);
+            foreach (var item in result.Results)
+            {
+                var suffix = item.Url.Substring(item.Url.LastIndexOf("species/") + "species/".Length);
+                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+            }
             return result;
         }
 
         public async Task<SpeciesModel> GetSpecies(string id)
         {
+            if (id == null) throw new ArgumentNullException(nameof(id));
             string url = $"species/{id}";
             var response = await _client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<SpeciesModel>(content, _serializationOptions);
-            var suffix = result.Url.Substring(result.Url.LastIndexOf("species/") + "species/".Length);
-            result.EntityId = suffix.Substring(0, suffix.Length - 1);
+            result.EntityId = id;
             return result;
         }
 
@@ -164,19 +188,25 @@ namespace MauiApp1.Services
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<PlanetSearchModel>(content, _serializationOptions);
+
+            foreach (var item in result.Results)
+            {
+                var suffix = item.Url.Substring(item.Url.LastIndexOf("planets/") + "planets/".Length);
+                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+            }
             return result;
         }
 
         public async Task<PlanetModel> GetPlanets(string id)
         {
+            if (id == null) throw new ArgumentNullException(nameof(id));
             string url = $"planets/{id}";
             var response = await _client.GetAsync(url);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
 
             var result = JsonSerializer.Deserialize<PlanetModel>(content, _serializationOptions);
-            var suffix = result.Url.Substring(result.Url.LastIndexOf("planets/") + "peoples/".Length);
-            result.EntityId = suffix.Substring(0, suffix.Length - 1);
+            result.EntityId = id;
             return result;
         }
     }

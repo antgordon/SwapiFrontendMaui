@@ -1,6 +1,7 @@
 using MauiApp1.Models;
 using MauiApp1.Services;
 using MauiApp1.ViewModel;
+using MauiApp1.ViewModel.Entity;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -21,8 +22,8 @@ public partial class PeopleSearchPage : ContentPage
     }
 
     public async void OnTapped(object sender, EventArgs args) {
-        var model = ((PeopleViewModel)((VerticalStackLayout)sender).BindingContext);
-        ViewModel.OpenItemCommand.Execute($"People?PeopleId={model.EntityId}");
+        var model = (PeopleViewModel)((BindableObject)sender).BindingContext;
+        ViewModel.OpenItemCommand.Execute($"PeopleEntity?Id={model.EntityId}");
 
     }
 }
