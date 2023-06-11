@@ -8,7 +8,6 @@ namespace MauiApp1.Models
 {
     public class FilmModel
     {
-
         public string Title { get; set; }
         public int Episode_Id { get; set; }
         public string Opening_Crawl { get; set; }
@@ -23,5 +22,6 @@ namespace MauiApp1.Models
         public DateTime Edited { get; set; }
         public string Url { get; set; }
         public string EntityId { get; set; }
+        public IList<EntityIdentifier> RelatedEntities { get; set; }
     }
 }

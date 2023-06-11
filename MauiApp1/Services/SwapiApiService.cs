@@ -1,13 +1,8 @@
 ﻿using MauiApp1.Models;
 using MauiApp1.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+using MauiApp1.Models.Enums;
 
 namespace MauiApp1.Services
 {
@@ -44,9 +39,9 @@ namespace MauiApp1.Services
             var result = JsonSerializer.Deserialize<FilmSearchModel>(content, _serializationOptions);
             foreach (var item in result.Results)
             {
-                var suffix = item.Url.Substring(item.Url.LastIndexOf("films/") + "films/".Length);
-                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+                item.EntityId = GetFilmIdFromUrl(item.Url);
             }
+
             return result;
         }
 
@@ -60,6 +55,25 @@ namespace MauiApp1.Services
             var content = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<FilmModel>(content, _serializationOptions);
             result.EntityId = id;
+            result.RelatedEntities = new List<EntityIdentifier>();
+
+            foreach (string entityUrl in result.Vehicles) 
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.Vehicle, GetVehiclesIdFromUrl(entityUrl)));
+            }
+            foreach (string entityUrl in result.Species)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.Species, GetSpeciesIdFromUrl(entityUrl)));
+            }
+            foreach (string entityUrl in result.Starships)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.Starship, GetStarshipsIdFromUrl(entityUrl)));
+            }
+            foreach (string entityUrl in result.Characters)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.People, GetPeopleIdFromUrl(entityUrl)));
+            }
+
             return result;
 
         }
@@ -74,8 +88,7 @@ namespace MauiApp1.Services
             var result = JsonSerializer.Deserialize<VehiclesSearchModel>(content, _serializationOptions);
             foreach (var item in result.Results)
             {
-                var suffix = item.Url.Substring(item.Url.LastIndexOf("vehicles/") + "vehicles/".Length);
-                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+                item.EntityId = GetVehiclesIdFromUrl(item.Url);
             }
             return result;
         }
@@ -90,6 +103,16 @@ namespace MauiApp1.Services
 
             var result = JsonSerializer.Deserialize<VehicleModel>(content, _serializationOptions);
             result.EntityId = id;
+            result.RelatedEntities = new List<EntityIdentifier>();
+
+            foreach (string entityUrl in result.Films)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.Film, GetFilmIdFromUrl(entityUrl)));
+            }
+            foreach (string entityUrl in result.Pilots)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.People, GetPeopleIdFromUrl(entityUrl)));
+            }
             return result;
         }
 
@@ -103,8 +126,7 @@ namespace MauiApp1.Services
             var result = JsonSerializer.Deserialize<PeopleSearchModel>(content, _serializationOptions);
             foreach (var item in result.Results)
             {
-                var suffix = item.Url.Substring(item.Url.LastIndexOf("people/") + "people/".Length);
-                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+                item.EntityId = GetPeopleIdFromUrl(item.Url);
             }
             return result;
         }
@@ -119,6 +141,25 @@ namespace MauiApp1.Services
 
             var result = JsonSerializer.Deserialize<PeopleModel>(content, _serializationOptions);
             result.EntityId = id;
+            result.RelatedEntities = new List<EntityIdentifier>();
+
+
+            foreach (string entityUrl in result.Films)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.Film, GetFilmIdFromUrl(entityUrl)));
+            }
+            foreach (string entityUrl in result.Species)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.People, GetSpeciesIdFromUrl(entityUrl)));
+            }
+            foreach (string entityUrl in result.Vehicles)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.Vehicle, GetVehiclesIdFromUrl(entityUrl)));
+            }
+            foreach (string entityUrl in result.Starships)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.Starship, GetStarshipsIdFromUrl(entityUrl)));
+            }
             return result;
         }
 
@@ -132,8 +173,7 @@ namespace MauiApp1.Services
             var result = JsonSerializer.Deserialize<StarshipsSearchModel>(content, _serializationOptions);
             foreach (var item in result.Results)
             {
-                var suffix = item.Url.Substring(item.Url.LastIndexOf("starships/") + "starships/".Length);
-                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+                item.EntityId = GetStarshipsIdFromUrl(item.Url);
             }
             return result;
         }
@@ -148,6 +188,17 @@ namespace MauiApp1.Services
 
             var result = JsonSerializer.Deserialize<StarshipModel>(content, _serializationOptions);
             result.EntityId = id;
+            result.RelatedEntities = new List<EntityIdentifier>();
+
+            foreach (string entityUrl in result.Films)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.Film, GetPeopleIdFromUrl(entityUrl)));
+            }
+            foreach (string entityUrl in result.Pilots)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.People, GetPeopleIdFromUrl(entityUrl)));
+            }
+
             return result;
         }
 
@@ -161,8 +212,7 @@ namespace MauiApp1.Services
             var result = JsonSerializer.Deserialize<SpeciesSearchModel>(content, _serializationOptions);
             foreach (var item in result.Results)
             {
-                var suffix = item.Url.Substring(item.Url.LastIndexOf("species/") + "species/".Length);
-                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+                item.EntityId = GetSpeciesIdFromUrl(item.Url);
             }
             return result;
         }
@@ -177,6 +227,17 @@ namespace MauiApp1.Services
 
             var result = JsonSerializer.Deserialize<SpeciesModel>(content, _serializationOptions);
             result.EntityId = id;
+            result.RelatedEntities = new List<EntityIdentifier>();
+
+            foreach (string entityUrl in result.People)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.People, GetPeopleIdFromUrl(entityUrl)));
+            }
+            foreach (string entityUrl in result.Films)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.Film, GetFilmIdFromUrl(entityUrl)));
+            }
+
             return result;
         }
 
@@ -191,8 +252,7 @@ namespace MauiApp1.Services
 
             foreach (var item in result.Results)
             {
-                var suffix = item.Url.Substring(item.Url.LastIndexOf("planets/") + "planets/".Length);
-                item.EntityId = suffix.Substring(0, suffix.Length - 1);
+                item.EntityId = GetPlanetIdFromUrl(item.Url);
             }
             return result;
         }
@@ -207,7 +267,32 @@ namespace MauiApp1.Services
 
             var result = JsonSerializer.Deserialize<PlanetModel>(content, _serializationOptions);
             result.EntityId = id;
+            result.RelatedEntities = new List<EntityIdentifier>();
+
+            foreach (string entityUrl in result.Residents)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.People, GetPeopleIdFromUrl(entityUrl)));
+            }
+            foreach (string entityUrl in result.Films)
+            {
+                result.RelatedEntities.Add(new EntityIdentifier(EntityType.Film, GetFilmIdFromUrl(entityUrl)));
+            }
+
             return result;
         }
+
+
+        private string GetIdFromUrl(string url, string prefix)
+        {
+            var suffix = url.Substring(url.LastIndexOf(prefix) + prefix.Length);
+            return suffix.Substring(0, suffix.Length - 1);
+        }
+
+        private string GetFilmIdFromUrl(string url) => GetIdFromUrl(url, "films/");
+        private string GetPlanetIdFromUrl(string url) => GetIdFromUrl(url, "planets/");
+        private string GetSpeciesIdFromUrl(string url) => GetIdFromUrl(url, "species/");
+        private string GetStarshipsIdFromUrl(string url) => GetIdFromUrl(url, "starships/");
+        private string GetPeopleIdFromUrl(string url) => GetIdFromUrl(url, "people/");
+        private string GetVehiclesIdFromUrl(string url) => GetIdFromUrl(url, "vehicles/");
     }
 }

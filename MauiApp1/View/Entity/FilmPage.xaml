@@ -6,7 +6,8 @@
              x:Class="MauiApp1.View.Entity.FilmPage"
              Title="Films"
              x:Name="page">
-    <Grid MaximumHeightRequest="600" MaximumWidthRequest="400" RowDefinitions="*,*,*" ColumnDefinitions="*">
+    
+        <Grid MaximumHeightRequest="600" MaximumWidthRequest="400" RowDefinitions="*,*,*,*" ColumnDefinitions="*,*">
         <VerticalStackLayout Grid.Row="0" Spacing="10"  HorizontalOptions="Center">
             <Label Text="{Binding Title}"/>
             <Label Text="{Binding ReleaseDate}"/>
@@ -17,15 +18,96 @@
             <Label Text="{Binding OpeningCrawl}" />
         </HorizontalStackLayout>
 
-        <VerticalStackLayout Grid.Row="2" HorizontalOptions="Center">
+        <VerticalStackLayout Grid.Row="2"  Grid.Column="0" HorizontalOptions="Center">
             <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto, Auto">
                 <Label Text="Credits" Grid.ColumnSpan="2" HorizontalOptions="Center"/>
                 <Label Text="Director" Grid.Row="1" Grid.Column="0"/>
                 <Label Text="{Binding Director}" Grid.Row="1" Grid.Column="1"/>
                 <Label Text="Producer" Grid.Row="2" Grid.Column="0"/>
                 <Label Text="{Binding Producer}" Grid.Row="2" Grid.Column="1"/>
+
             </Grid>
         </VerticalStackLayout>
-        <Button Text="Back" Clicked="BackOut" Grid.Row="3"/>
+        <ScrollView Grid.Row="0" Grid.Column="1" Grid.RowSpan="3">
+            <VerticalStackLayout >
+            <Label 
+                Text="Characters"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                StyleClass="Title"/>
+            <CollectionView x:Name="CharactersContent" ItemsSource="{Binding Characters}" HorizontalOptions="Center">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <AbsoluteLayout>
+                            <AbsoluteLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTappedViewModel"/>
+                            </AbsoluteLayout.GestureRecognizers>
+                            <Label Text="{Binding EntityName}" FontAttributes="Bold"/>
+                        </AbsoluteLayout>
+        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label 
+                Text="Vehicles"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                StyleClass="Title"/>
+            <CollectionView x:Name="VehiclesContent" ItemsSource="{Binding Vehicles}" HorizontalOptions="Center">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <AbsoluteLayout>
+                            <AbsoluteLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTappedViewModel"/>
+                            </AbsoluteLayout.GestureRecognizers>
+                            <Label Text="{Binding EntityName}" FontAttributes="Bold"/>
+                        </AbsoluteLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label 
+                Text="Starships"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                StyleClass="Title"/>
+            <CollectionView x:Name="StarshipsContent" ItemsSource="{Binding Starships}" HorizontalOptions="Center">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <AbsoluteLayout>
+                            <AbsoluteLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTappedViewModel"/>
+                            </AbsoluteLayout.GestureRecognizers>
+                            <Label Text="{Binding EntityName}" FontAttributes="Bold"/>
+                        </AbsoluteLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label 
+                Text="Species"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                StyleClass="Title"/>
+            <CollectionView x:Name="SpeciesContent" ItemsSource="{Binding Species}" HorizontalOptions="Center">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <AbsoluteLayout>
+                            <AbsoluteLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTappedViewModel"/>
+                            </AbsoluteLayout.GestureRecognizers>
+                            <Label Text="{Binding EntityName}" FontAttributes="Bold"/>
+                        </AbsoluteLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+
+        <Button Text="Back" Clicked="BackOut" Grid.Row="4"/>
+            
     </Grid>
+
 </ContentPage>
